@@ -1,0 +1,77 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\lstdefinestyle{python}{
+language=Python,
+basicstyle=\ttfamily\small,
+keywordstyle=\color{blue}\bfseries,
+stringstyle=\color{red},
+commentstyle=\color{green!50!black},
+showstringspaces=false,
+breaklines=true
+}
+
+\title{Simulación de Eventos Discretos}
+\author{Nombre: Darío \\ Grupo: C-311 \\ Telegram: @dhc667}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+\newpage
+
+\section{Introducción}
+\subsection{Descripción del Proyecto}
+Este es un proyecto de simulación de eventos discretos, cuyo objetivo es demostrar conocimientos adquiridos en clases en dicho campo.
+\subsection{Sistema a Simular y Variables de Interés}
+Se simulará un sistema de colas, basado en un modelo M/G/k, donde se analizará el tiempo de espera promedio de los clientes en un tiempo dado. La implementación es generalizable a cualquier número de servidores, con distribuciones posiblemente diferentes. La distribución de llegada también es parametrizable. El único requerimiento es que estas no tengan memoria, ni dependan del tiempo, aunque el sistema es lo suficientemente extensible para que implementar estas funcionalidades sea relativamente sencillo, no era parte del alcance del proyecto.
+
+\section{Detalles de Implementación}
+\subsection{Pasos Seguidos para la Implementación}
+La implementación es similar a las discutidas en clase, con la diferencia de la parametrizabilidad de la cantidad de servidores, también se aceptan ''generadores de prioridad'' para estos, esto es para el caso en que un cliente vea varios servidores libres, se generarán dichas prioridades (que pueden ser constantes), y el cliente elegirá el que tenga un valor mínimo de dicha prioridad.
+
+El constructor del objeto que manejará la simulación acepta
+
+\begin{lstlisting}[style=python, caption={Example Python Code}]
+def simulate_event():
+    print("Simulating an event...")
+    return True
+simulate_event()
+\end{lstlisting}
+
+El núcleo de la simulación es una cola con prioridad, con tuplas (tiempo, evento), ordenadas por tiempo. Por ejemplo, al iniciar la simulación se 
+
+\section{Resultados y Experimentos}
+\subsection{Hallazgos de la Simulación}
+% Resultados obtenidos de la simulación.
+\subsection{Interpretación de los Resultados}
+% Interpretación de los resultados obtenidos.
+\subsection{Hipótesis y Validación}
+% Hipótesis extraídas y experimentos realizados para validarlas.
+\subsection{Análisis Estadístico y Parada}
+% Análisis estadístico y análisis de parada de la simulación.
+
+\section{Modelo Matemático (Opcional)}
+\subsection{Descripción del Modelo}
+% Descripción del modelo matemático utilizado.
+\subsection{Supuestos y Restricciones}
+% Supuestos y restricciones del modelo.
+\subsection{Comparación de Resultados}
+% Comparación de resultados obtenidos con resultados experimentales.
+
+\section{Conclusiones}
+% Conclusiones del proyecto.
+
+\appendix
+\section{Código Fuente}
+% Incluir fragmentos relevantes del código fuente si es necesario.
+
+\end{document}
+

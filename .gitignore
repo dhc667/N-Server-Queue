@@ -1,0 +1,7 @@
+.vscode
+__pycache__
+report.aux
+report.log
+report.out
+report.toc
+inventory_model.py
