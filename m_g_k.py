@@ -55,7 +55,7 @@ class NServerQueue:
         self.servers_free: set[int] = set(range(len(servers)))
         self.servers_serving: list[int | None] = [None] * len(servers)
         self.people_serviced: list[int] = [0] * len(servers)
-        self.captured_states: list[Snapshot] = []
+        self.captured_states: list[Snapshot] | None = None
         self.ran = False
 
         self.time_in_queue: dict[int, float] = {}
@@ -70,16 +70,29 @@ class NServerQueue:
             )
         )
         snapshot = Snapshot(self.current_time, len(self.people_in_queue), self.people_serviced.copy(), self.servers_free.copy(), servers_serving.copy())
+        if self.captured_states == None:
+            raise RuntimeError("expected captured states to not be None")
         self.captured_states.append(snapshot)
 
-    def run(self, verbose: bool = False):
+    def run(self, capture_states: bool = False, verbose: bool = False) :
         if self.ran:
             raise RuntimeError("model has already been run")
 
         self.event_queue.append((self.current_time + self.arrival_generator(), EventData(EventType.Arrival)))
+
+        if not capture_states and verbose:
+            raise ValueError("can only be verbose when capture_states is True")
+
+        if capture_states:
+            self.captured_states = []
+
         while len(self.event_queue) > 0:
             self.handle_event()
+            if capture_states:
+                self.capture_state()
             if verbose:
+                if self.captured_states == None:
+                    raise RuntimeError("expected captured states to not be None")
                 print(self.captured_states[-1])
 
         self.ran = True
@@ -95,7 +108,6 @@ class NServerQueue:
         else:
             raise RuntimeError(f"unknown event type {event}")
 
-        self.capture_state()
 
     def get_server_to_serve(self):
         server_id = min(self.servers_free, key=lambda x: self.servers[x].priority_generator())

@@ -78,7 +78,7 @@ model_2 = NServerQueue(
 
 El núcleo de la simulación es un ciclo que maneja eventos. Solo hay dos tipos de eventos: llegada (cuando un cliente llega al sistema y se encola o entra al servicio de un servidor si encuentra uno libre), y salida (cuando un cliente termina de ser atendido por un servidor y se va del sistema). Cuando el tiempo actual es mayor que el final se dejan de generar llegadas, y se espera a que todos los clientes en el sistema terminen de ser atendidos. Los eventos se mantienen en una cola con prioridad, donde el próximo evento a procesar se mantiene al tope de la cola.
 
-Además de esto, se guardan ''Snapshots'' de la simulación en cada evento, para inspección más granular de la simulación, esto no es necesario para la aplicación de este proyecto, pero es útil para depuración y análisis posterior. Estos snapshots son objetos que contienen el estado de la simulación en un momento dado.
+Además de esto, se guardan ''Snapshots'' de la simulación en cada evento, para inspección más granular de la simulación, esto no es necesario para la aplicación de este proyecto, pero es útil para depuración y análisis posterior, por defecto esta funcionalidad está desactivada, se puede activar como un parámetro en la fución \texttt{run}, que comienza la simulación. Estos snapshots son objetos que contienen el estado de la simulación en un momento dado.
 
 \begin{lstlisting}[style=python, caption={Clase Snapshot}]
 class Snapshot:
