@@ -29,7 +29,6 @@ class Snapshot:
         self.people_serviced = people_serviced
         self.free_servers = free_servers
         self.servers_serving = servers_serving
-        self.people_serviced = people_serviced
 
     def __repr__(self):
         return f"Snapshot(time={self.time}, people_in_queue={self.people_in_queue}, people_serviced={self.people_serviced}, free_servers={self.free_servers}, servers_serving={self.servers_serving})"
@@ -40,7 +39,7 @@ class Snapshot:
     def __lt__(self, other):
         return self.time < other.time
 
-class MGKQueue:
+class NServerQueue:
     def __init__(self, servers: list[Server], arrival_generator: Callable[[], float], end_time: float):
         if (len(servers) == 0):
             raise ValueError("MGKQueue must have at least one server")
